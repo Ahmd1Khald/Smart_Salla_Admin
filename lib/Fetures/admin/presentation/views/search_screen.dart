@@ -52,7 +52,7 @@ class _SearchScreenState extends State<SearchScreen> {
             title: TitlesTextWidget(
                 label: passedCategory ?? AppStrings.searchString),
             leading: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(4.0),
               child: Image.asset(AssetsImages.shoppingCart),
             ),
           ),

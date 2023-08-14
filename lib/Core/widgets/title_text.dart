@@ -4,7 +4,7 @@ class TitlesTextWidget extends StatelessWidget {
   const TitlesTextWidget({
     Key? key,
     required this.label,
-    this.fontSize = 20,
+    this.fontSize = 22,
     this.color,
     this.maxLines,
   }) : super(key: key);

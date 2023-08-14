@@ -33,9 +33,12 @@ class DashboardScreenState extends State<DashboardScreen> {
                 padding: const EdgeInsets.all(12.0),
                 child: DynamicHeightGridView(
                   builder: (context, index) => DashboardButton(
-                    image: getDashboardMenuList(context)[index].image,
-                    subTitle: getDashboardMenuList(context)[index].subtitle,
-                    onPressed: getDashboardMenuList(context)[index].onPressed,
+                    image:
+                        AppVariables.getDashboardMenuList(context)[index].image,
+                    subTitle: AppVariables.getDashboardMenuList(context)[index]
+                        .subtitle,
+                    onPressed: AppVariables.getDashboardMenuList(context)[index]
+                        .onPressed,
                   ),
                   itemCount: 3,
                   crossAxisCount: 2,
@@ -50,10 +53,14 @@ class DashboardScreenState extends State<DashboardScreen> {
 
   AppBar dashboardAppBar(ThemeProvider themeProvider) {
     return AppBar(
-      title: const TitlesTextWidget(label: AppStrings.dashboardScreenString),
+      title: const TitlesTextWidget(
+        label: AppStrings.dashboardScreenString,
+      ),
       leading: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Image.asset(AssetsImages.shoppingCart),
+        padding: const EdgeInsets.all(4.0),
+        child: Image.asset(
+          AssetsImages.shoppingCart,
+        ),
       ),
       actions: [
         IconButton(

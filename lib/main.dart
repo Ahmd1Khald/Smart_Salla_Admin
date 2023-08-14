@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
               isDarkTheme: themeProvider.getIsDarkTheme, context: context),
           home: const DashboardScreen(),
           onGenerateRoute: Routes.getRoute,
-          initialRoute: Routes.dashboardRoute,
+          initialRoute: Routes.editOrUploadProductRoute,
         );
       }),
     );

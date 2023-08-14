@@ -3,6 +3,7 @@ import 'package:salla_admin/Fetures/admin/presentation/views/dashboard_screen.da
 import 'package:salla_admin/Fetures/admin/presentation/views/inner_screens/orders/orders_screen.dart';
 import 'package:salla_admin/Fetures/admin/presentation/views/search_screen.dart';
 
+import '../Fetures/admin/presentation/views/inner_screens/edit_upload_product_form.dart';
 import 'consts/app_strings.dart';
 
 class Routes {
@@ -13,6 +14,7 @@ class Routes {
   static const String allProductRoute = "/allProduct";
 
   static const String viewOrdersRoute = "/viewOrders";
+  static const String editOrUploadProductRoute = "/EditOrUploadProduct";
 
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -22,6 +24,9 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const SearchScreen());
       case Routes.viewOrdersRoute:
         return MaterialPageRoute(builder: (_) => const OrdersScreenFree());
+      case Routes.editOrUploadProductRoute:
+        return MaterialPageRoute(
+            builder: (_) => const EditOrUploadProductScreen());
       default:
         return unDefinedRoute();
     }
