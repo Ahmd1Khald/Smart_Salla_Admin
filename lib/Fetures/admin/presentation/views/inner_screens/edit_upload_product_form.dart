@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../../Core/consts/app_strings.dart';
 import '../../../../../Core/consts/app_variables.dart';
 import '../../../../../Core/consts/my_validators.dart';
 import '../../../../../Core/services/my_app_method.dart';
@@ -111,61 +112,11 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        bottomSheet: SizedBox(
-          height: kBottomNavigationBarHeight + 10,
-          child: Material(
-            color: Theme.of(context).scaffoldBackgroundColor,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.all(12),
-                    backgroundColor: Colors.red,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        10,
-                      ),
-                    ),
-                  ),
-                  icon: const Icon(Icons.clear),
-                  label: const Text(
-                    "Clear",
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                  onPressed: () {},
-                ),
-                ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.all(12),
-                    // backgroundColor: Colors.red,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        10,
-                      ),
-                    ),
-                  ),
-                  icon: const Icon(Icons.upload),
-                  label: const Text(
-                    "Upload Product",
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                  onPressed: () {
-                    _uploadProduct();
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
+        bottomSheet: buildUploadProductBtmSht(context),
         appBar: AppBar(
           centerTitle: true,
           title: const TitlesTextWidget(
-            label: "Upload a new product",
+            label: AppStrings.uploadProductScreenTitleString,
           ),
         ),
         body: SafeArea(
@@ -180,16 +131,7 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
                 const SizedBox(
                   height: 25,
                 ),
-                DropdownButton<String>(
-                  hint: const Text("Select Category"),
-                  value: _categoryValue,
-                  items: AppVariables.categoriesDropDownList,
-                  onChanged: (String? value) {
-                    setState(() {
-                      _categoryValue = value;
-                    });
-                  },
-                ),
+                categoryDropdownButton(),
                 const SizedBox(
                   height: 25,
                 ),
@@ -200,12 +142,13 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
                     key: _formKey,
                     child: Column(
                       children: [
+                        //product title
                         TextFormField(
                           controller: _titleController,
                           key: const ValueKey('Title'),
-                          maxLength: 80,
+                          maxLength: 90,
                           minLines: 1,
-                          maxLines: 2,
+                          maxLines: 3,
                           keyboardType: TextInputType.multiline,
                           textInputAction: TextInputAction.newline,
                           decoration: const InputDecoration(
@@ -223,6 +166,7 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
                         ),
                         Row(
                           children: [
+                            //product price
                             Flexible(
                               flex: 1,
                               child: TextFormField(
@@ -252,6 +196,7 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
                             const SizedBox(
                               width: 10,
                             ),
+                            //product quantity
                             Flexible(
                               flex: 1,
                               child: TextFormField(
@@ -275,6 +220,7 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
                           ],
                         ),
                         const SizedBox(height: 15),
+                        //product description
                         TextFormField(
                           key: const ValueKey('Description'),
                           controller: _descriptionController,
@@ -303,6 +249,73 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  DropdownButton<String> categoryDropdownButton() {
+    return DropdownButton<String>(
+      hint: const Text("Select Category"),
+      value: _categoryValue,
+      items: AppVariables.categoriesDropDownList,
+      onChanged: (String? value) {
+        setState(() {
+          _categoryValue = value;
+        });
+      },
+    );
+  }
+
+  SizedBox buildUploadProductBtmSht(BuildContext context) {
+    return SizedBox(
+      height: kBottomNavigationBarHeight + 10,
+      child: Material(
+        color: Theme.of(context).scaffoldBackgroundColor,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.all(12),
+                backgroundColor: Colors.red,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(
+                    10,
+                  ),
+                ),
+              ),
+              icon: const Icon(Icons.clear),
+              label: const Text(
+                "Clear",
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+              onPressed: () {},
+            ),
+            ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.all(12),
+                // backgroundColor: Colors.red,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(
+                    10,
+                  ),
+                ),
+              ),
+              icon: const Icon(Icons.upload),
+              label: const Text(
+                "Upload Product",
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+              onPressed: () {
+                _uploadProduct();
+              },
+            ),
+          ],
         ),
       ),
     );

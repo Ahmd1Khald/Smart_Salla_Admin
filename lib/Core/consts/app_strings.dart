@@ -6,4 +6,5 @@ class AppStrings {
   static const String noResultString = "No Result found";
   static const String placedOrderString = 'Placed orders';
   static const String noPlacedOrderString = "No orders has been placed yet";
+  static const String uploadProductScreenTitleString = "Upload a new product";
 }
