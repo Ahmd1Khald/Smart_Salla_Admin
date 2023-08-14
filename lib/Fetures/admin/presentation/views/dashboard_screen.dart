@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../Core/services/assets_manager.dart';
-import '../Core/widgets/title_text.dart';
-import '../providers/theme_provider.dart';
+import '../../../../Core/consts/app_strings.dart';
+import '../../../../Core/providers/theme_provider.dart';
+import '../../../../Core/services/assets_manager.dart';
+import '../../../../Core/widgets/title_text.dart';
 
 class DashboardScreen extends StatefulWidget {
   static const routeName = '/DashboardScreen';
@@ -20,7 +21,7 @@ class DashboardScreenState extends State<DashboardScreen> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: const TitlesTextWidget(label: "Dashboard Screen"),
+        title: const TitlesTextWidget(label: AppStrings.dashboardScreenString),
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Image.asset(AssetsImages.shoppingCart),
@@ -38,7 +39,7 @@ class DashboardScreenState extends State<DashboardScreen> {
         ],
       ),
       body: const Center(
-        child: TitlesTextWidget(label: "Dashboard Screen"),
+        child: TitlesTextWidget(label: AppStrings.dashboardScreenString),
       ),
     );
   }

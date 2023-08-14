@@ -1,9 +1,9 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 
-import '../../../Core/consts/app_constants.dart';
-import '../../../Core/widgets/subtitle_text.dart';
-import '../../../Core/widgets/title_text.dart';
+import '../../../../../../Core/consts/app_constants.dart';
+import '../../../../../../Core/widgets/subtitle_text.dart';
+import '../../../../../../Core/widgets/title_text.dart';
 
 class OrdersWidgetFree extends StatefulWidget {
   const OrdersWidgetFree({super.key});

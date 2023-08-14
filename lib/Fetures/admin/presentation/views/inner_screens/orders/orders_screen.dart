@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../Core/services/assets_manager.dart';
-import '../../../Core/widgets/empty_bag.dart';
-import '../../../Core/widgets/title_text.dart';
+import '../../../../../../Core/consts/app_strings.dart';
+import '../../../../../../Core/services/assets_manager.dart';
+import '../../../../../../Core/widgets/empty_bag.dart';
+import '../../../../../../Core/widgets/title_text.dart';
 import 'orders_widget.dart';
 
 class OrdersScreenFree extends StatefulWidget {
@@ -21,13 +22,13 @@ class _OrdersScreenFreeState extends State<OrdersScreenFree> {
     return Scaffold(
         appBar: AppBar(
           title: const TitlesTextWidget(
-            label: 'Placed orders',
+            label: AppStrings.placedOrderString,
           ),
         ),
         body: isEmptyOrders
             ? EmptyBagWidget(
                 imagePath: AssetsImages.orderBag,
-                title: "No orders has been placed yet",
+                title: AppStrings.noPlacedOrderString,
                 subtitle: "",
               )
             : ListView.separated(

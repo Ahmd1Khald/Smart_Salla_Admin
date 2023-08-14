@@ -11,9 +11,8 @@ class Styles {
       scaffoldBackgroundColor: isDarkTheme
           ? AppColors.darkScaffoldColor
           : AppColors.lightScaffoldColor,
-      cardColor: isDarkTheme
-          ? const Color.fromARGB(255, 13, 6, 37)
-          : AppColors.lightCardColor,
+      cardColor:
+          isDarkTheme ? AppColors.dartCardColor : AppColors.lightCardColor,
       brightness: isDarkTheme ? Brightness.dark : Brightness.light,
       appBarTheme: AppBarTheme(
         iconTheme: IconThemeData(

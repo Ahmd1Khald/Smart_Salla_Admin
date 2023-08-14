@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
-import '../models/product_model.dart';
+import '../../../data/models/product_model.dart';
 
 class ProductProvider with ChangeNotifier {
   List<ProductModel> get getProducts {

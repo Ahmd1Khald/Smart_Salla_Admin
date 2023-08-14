@@ -2,7 +2,7 @@ import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/product_provider.dart';
+import '../../Fetures/admin/presentation/controller/providers/product_provider.dart';
 import 'subtitle_text.dart';
 import 'title_text.dart';
 

@@ -2,11 +2,12 @@ import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../Core/services/assets_manager.dart';
-import '../Core/widgets/product_widget.dart';
-import '../Core/widgets/title_text.dart';
-import '../models/product_model.dart';
-import '../providers/product_provider.dart';
+import '../../../../Core/consts/app_strings.dart';
+import '../../../../Core/services/assets_manager.dart';
+import '../../../../Core/widgets/product_widget.dart';
+import '../../../../Core/widgets/title_text.dart';
+import '../../data/models/product_model.dart';
+import '../controller/providers/product_provider.dart';
 
 class SearchScreen extends StatefulWidget {
   static const routeName = '/SearchScreen';
@@ -48,7 +49,8 @@ class _SearchScreenState extends State<SearchScreen> {
       },
       child: Scaffold(
           appBar: AppBar(
-            title: TitlesTextWidget(label: passedCategory ?? "Search"),
+            title: TitlesTextWidget(
+                label: passedCategory ?? AppStrings.searchString),
             leading: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Image.asset(AssetsImages.shoppingCart),
@@ -56,7 +58,7 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
           body: productList.isEmpty
               ? const Center(
-                  child: TitlesTextWidget(label: "No product found"),
+                  child: TitlesTextWidget(label: AppStrings.noProductString),
                 )
               : Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -68,7 +70,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       TextField(
                         controller: searchTextController,
                         decoration: InputDecoration(
-                          hintText: "Search",
+                          hintText: AppStrings.searchString,
                           filled: true,
                           prefixIcon: const Icon(Icons.search),
                           suffixIcon: GestureDetector(
@@ -105,7 +107,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           productListSearch.isEmpty) ...[
                         const Center(
                             child: TitlesTextWidget(
-                          label: "No results found",
+                          label: AppStrings.noResultString,
                           fontSize: 40,
                         ))
                       ],

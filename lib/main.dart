@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:salla_admin/screens/dashboard_screen.dart';
 
 import 'Core/consts/theme_data.dart';
-import 'providers/product_provider.dart';
-import 'providers/theme_provider.dart';
-import 'screens/inner_screens/orders/orders_screen.dart';
-import 'screens/search_screen.dart';
+import 'Core/providers/theme_provider.dart';
+import 'Core/root_manager.dart';
+import 'Fetures/admin/presentation/controller/providers/product_provider.dart';
+import 'Fetures/admin/presentation/views/dashboard_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -39,10 +38,8 @@ class MyApp extends StatelessWidget {
           theme: Styles.themeData(
               isDarkTheme: themeProvider.getIsDarkTheme, context: context),
           home: const DashboardScreen(),
-          routes: {
-            OrdersScreenFree.routeName: (context) => const OrdersScreenFree(),
-            SearchScreen.routeName: (context) => const SearchScreen(),
-          },
+          onGenerateRoute: Routes.getRoute,
+          initialRoute: Routes.dashboardRoute,
         );
       }),
     );
