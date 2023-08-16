@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -126,8 +129,57 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                /* Image picker here ***********************************/
-
+                SizedBox(
+                  width: size.width * 0.4,
+                  height: size.width * 0.43,
+                  child: DottedBorder(
+                    child: _pickedImage == null
+                        ? Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Center(
+                                child: Icon(
+                                  Icons.image_outlined,
+                                  color: Colors.blue,
+                                  size: 80,
+                                ),
+                              ),
+                              Center(
+                                child: TextButton(
+                                  onPressed: () {
+                                    localImagePicker();
+                                  },
+                                  child: const SubtitleTextWidget(
+                                    label: 'Put product image',
+                                    color: Colors.blue,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        : Image.file(
+                            File(
+                              _pickedImage!.path,
+                            ),
+                            height: size.width * 0.43,
+                            width: size.width * 0.4,
+                            fit: BoxFit.cover,
+                          ),
+                  ),
+                ),
+                if (_pickedImage != null) ...[
+                  TextButton(
+                    onPressed: () {
+                      removePickedImage();
+                    },
+                    child: const SubtitleTextWidget(
+                      label: 'Remove image',
+                      color: Colors.red,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
                 const SizedBox(
                   height: 25,
                 ),
@@ -292,7 +344,9 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
                   fontSize: 20,
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                removePickedImage();
+              },
             ),
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
