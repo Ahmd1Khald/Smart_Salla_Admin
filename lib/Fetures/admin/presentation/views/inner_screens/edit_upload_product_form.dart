@@ -11,13 +11,15 @@ import '../../../../../Core/consts/my_validators.dart';
 import '../../../../../Core/services/my_app_method.dart';
 import '../../../../../Core/widgets/subtitle_text.dart';
 import '../../../../../Core/widgets/title_text.dart';
+import '../../../data/models/product_model.dart';
 
 class EditOrUploadProductScreen extends StatefulWidget {
-  static const routeName = '/EditOrUploadProductScreen';
-
   const EditOrUploadProductScreen({
     super.key,
+    this.productModel,
   });
+
+  final ProductModel? productModel;
 
   @override
   State<EditOrUploadProductScreen> createState() =>
@@ -33,12 +35,20 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
       _descriptionController,
       _quantityController;
   String? _categoryValue;
+  bool isEdite = false;
   @override
   void initState() {
-    _titleController = TextEditingController(text: "");
-    _priceController = TextEditingController(text: "");
-    _descriptionController = TextEditingController(text: "");
-    _quantityController = TextEditingController(text: "");
+    if (widget.productModel != null) {
+      isEdite = true;
+    }
+    _titleController =
+        TextEditingController(text: widget.productModel?.productTitle ?? '');
+    _priceController =
+        TextEditingController(text: widget.productModel?.productPrice ?? '');
+    _descriptionController = TextEditingController(
+        text: widget.productModel?.productDescription ?? '');
+    _quantityController =
+        TextEditingController(text: widget.productModel?.productQuantity ?? '');
 
     super.initState();
   }
@@ -75,6 +85,14 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
       );
       return;
     }
+    if (_pickedImage == null) {
+      MyAppMethods.showErrorORWarningDialog(
+        context: context,
+        subtitle: "Please pick up an image",
+        fct: () {},
+      );
+      return;
+    }
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
     if (isValid) {}
@@ -83,6 +101,14 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
   Future<void> _editProduct() async {
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
+    if (_pickedImage == null && widget.productModel?.productImage != null) {
+      MyAppMethods.showErrorORWarningDialog(
+        context: context,
+        subtitle: "Please pick up an image",
+        fct: () {},
+      );
+      return;
+    }
 
     if (isValid) {}
   }
@@ -129,45 +155,62 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                SizedBox(
-                  width: size.width * 0.4,
-                  height: size.width * 0.43,
-                  child: DottedBorder(
-                    child: _pickedImage == null
-                        ? Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Center(
-                                child: Icon(
-                                  Icons.image_outlined,
-                                  color: Colors.blue,
-                                  size: 80,
-                                ),
-                              ),
-                              Center(
-                                child: TextButton(
-                                  onPressed: () {
-                                    localImagePicker();
-                                  },
-                                  child: const SubtitleTextWidget(
-                                    label: 'Put product image',
+                if (isEdite && widget.productModel?.productImage != null) ...[
+                  SizedBox(
+                    width: size.width * 0.4,
+                    height: size.width * 0.43,
+                    child: DottedBorder(
+                      color: Colors.grey,
+                      child: Image.network(
+                        widget.productModel!.productImage,
+                        height: size.width * 0.43,
+                        width: size.width * 0.4,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ] else ...[
+                  SizedBox(
+                    width: size.width * 0.4,
+                    height: size.width * 0.43,
+                    child: DottedBorder(
+                      color: Colors.grey,
+                      child: _pickedImage == null
+                          ? Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Center(
+                                  child: Icon(
+                                    Icons.image_outlined,
                                     color: Colors.blue,
-                                    fontSize: 14,
+                                    size: 80,
                                   ),
                                 ),
+                                Center(
+                                  child: TextButton(
+                                    onPressed: () {
+                                      localImagePicker();
+                                    },
+                                    child: const SubtitleTextWidget(
+                                      label: 'Put product image',
+                                      color: Colors.blue,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          : Image.file(
+                              File(
+                                _pickedImage!.path,
                               ),
-                            ],
-                          )
-                        : Image.file(
-                            File(
-                              _pickedImage!.path,
+                              height: size.width * 0.43,
+                              width: size.width * 0.4,
+                              fit: BoxFit.cover,
                             ),
-                            height: size.width * 0.43,
-                            width: size.width * 0.4,
-                            fit: BoxFit.cover,
-                          ),
+                    ),
                   ),
-                ),
+                ],
                 if (_pickedImage != null) ...[
                   TextButton(
                     onPressed: () {
@@ -308,7 +351,7 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
 
   DropdownButton<String> categoryDropdownButton() {
     return DropdownButton<String>(
-      hint: const Text("Select Category"),
+      hint: Text(widget.productModel?.productCategory ?? "Select Category"),
       value: _categoryValue,
       items: AppVariables.categoriesDropDownList,
       onChanged: (String? value) {
@@ -359,14 +402,14 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
                 ),
               ),
               icon: const Icon(Icons.upload),
-              label: const Text(
-                "Upload Product",
-                style: TextStyle(
+              label: Text(
+                isEdite ? "Edit Product" : "Upload Product",
+                style: const TextStyle(
                   fontSize: 20,
                 ),
               ),
               onPressed: () {
-                _uploadProduct();
+                isEdite ? _editProduct() : _uploadProduct();
               },
             ),
           ],

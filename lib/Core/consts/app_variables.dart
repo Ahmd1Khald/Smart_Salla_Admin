@@ -10,7 +10,9 @@ class AppVariables {
       DashboardMenuModel(
         subtitle: 'Add a new product',
         image: AssetsImages.bagWish,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, Routes.editOrUploadProductRoute);
+        },
       ),
       DashboardMenuModel(
         subtitle: 'Inspect all products',

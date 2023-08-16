@@ -1,6 +1,7 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:salla_admin/Fetures/admin/presentation/views/inner_screens/edit_upload_product_form.dart';
 
 import '../../Fetures/admin/presentation/controller/providers/product_provider.dart';
 import 'subtitle_text.dart';
@@ -30,11 +31,14 @@ class _ProductWidgetState extends State<ProductWidget> {
             padding: const EdgeInsets.all(3.0),
             child: GestureDetector(
               onTap: () async {
-                // await Navigator.pushNamed(
-                //   context,
-                //   ProductDetails.routName,
-                //   arguments: getCurrProduct.productId,
-                // );
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EditOrUploadProductScreen(
+                      productModel: getCurrProduct,
+                    ),
+                  ),
+                );
               },
               child: Column(
                 children: [
