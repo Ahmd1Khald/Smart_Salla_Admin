@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "654984880372",
+    "project_id": "smart-sallah-users",
+    "storage_bucket": "smart-sallah-users.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654984880372:android:270975d1c2ddd830a1fea1",
+        "android_client_info": {
+          "package_name": "com.example.salla_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "654984880372-0526kili8mli2p5q9i5fmmlfc6riclpg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGrS5cFbghXDzxPYHB_-u5jm5At40oT5k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "654984880372-0526kili8mli2p5q9i5fmmlfc6riclpg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "654984880372-ikib9vt492chifif0pv2cioujc2395kl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sallaUsers"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654984880372:android:8e6ea5940f031e27a1fea1",
+        "android_client_info": {
+          "package_name": "com.example.salla_users"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "654984880372-3e3lv3ii5rpk3e17qjm6jh9tnhfduoit.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.salla_users",
+            "certificate_hash": "4d8139a8aec82c4854a47fe3b01c71d58480e8e5"
+          }
+        },
+        {
+          "client_id": "654984880372-0526kili8mli2p5q9i5fmmlfc6riclpg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGrS5cFbghXDzxPYHB_-u5jm5At40oT5k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "654984880372-0526kili8mli2p5q9i5fmmlfc6riclpg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "654984880372-ikib9vt492chifif0pv2cioujc2395kl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sallaUsers"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
