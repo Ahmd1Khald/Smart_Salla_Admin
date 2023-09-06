@@ -1,9 +1,13 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../../../Core/consts/app_strings.dart';
 import '../../../../../Core/consts/app_variables.dart';
@@ -29,6 +33,8 @@ class EditOrUploadProductScreen extends StatefulWidget {
 class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
   final _formKey = GlobalKey<FormState>();
   XFile? _pickedImage;
+  final auth = FirebaseAuth.instance;
+  String? userReturnedUrl;
 
   late TextEditingController _titleController,
       _priceController,
@@ -76,6 +82,22 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
     });
   }
 
+  Future<void> uploadProductImageAndGiveLink(
+    BuildContext context,
+  ) async {
+    final ref = FirebaseStorage.instance
+        .ref()
+        .child('products_images')
+        .child("${_titleController.text.trim()}.jpg");
+
+    await ref.putFile(File(_pickedImage!.path)).then((p0) async {
+      await ref.getDownloadURL().then((url) {
+        userReturnedUrl = url;
+        print(userReturnedUrl ?? "No url found");
+      });
+    });
+  }
+
   Future<void> _uploadProduct() async {
     if (_categoryValue == null) {
       MyAppMethods.showErrorORWarningDialog(
@@ -95,7 +117,46 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
     }
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
-    if (isValid) {}
+    if (isValid) {
+      try {
+        MyAppMethods.loadingPage(context: context);
+        uploadProductImageAndGiveLink(context).then((value) async {
+          final uid = const Uuid().v4();
+          await FirebaseFirestore.instance
+              .collection(AppStrings.productsCollection)
+              .doc(uid)
+              .set({
+            'productId': uid,
+            'productTitle': _titleController.text,
+            'productImage': userReturnedUrl,
+            'productPrice': _priceController.text,
+            'productCategory': _categoryValue,
+            'productDescription': _descriptionController.text,
+            'productQuantity': _quantityController.text,
+            'createdAt': Timestamp.now(),
+          }).then((value) {
+            Navigator.pop(context);
+            MyAppMethods.uploadedSuccess(context);
+          });
+        });
+      } on FirebaseAuthException catch (error) {
+        await MyAppMethods.showErrorORWarningDialog(
+          context: context,
+          subtitle: "An error has been occured ${error.message}",
+          fct: () {
+            Navigator.pop(context);
+          },
+        );
+      } catch (error) {
+        await MyAppMethods.showErrorORWarningDialog(
+          context: context,
+          subtitle: "An error has been occured $error",
+          fct: () {
+            Navigator.pop(context);
+          },
+        );
+      }
+    }
   }
 
   Future<void> _editProduct() async {

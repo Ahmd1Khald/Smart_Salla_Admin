@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/subtitle_text.dart';
@@ -124,4 +125,25 @@ class MyAppMethods {
           );
         });
   }
+
+  static void uploadedSuccess(BuildContext context) {
+    AwesomeDialog(
+            context: context,
+            dialogType: DialogType.success,
+            animType: AnimType.bottomSlide,
+            desc: 'Product Added Successfully',
+            btnOkOnPress: () {},
+            btnOkText: 'OK')
+        .show();
+  }
+
+  static loadingPage({required context}) => showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) => const Center(
+          child: CircularProgressIndicator(
+            color: Colors.white,
+          ),
+        ),
+      );
 }

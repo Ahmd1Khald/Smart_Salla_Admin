@@ -1,5 +1,7 @@
 class AppStrings {
   static const String noRoute = 'No Screen Found';
+  static const String appName = 'Smart Salla(admin)';
+  static const String productsCollection = 'products';
   static const String dashboardScreenString = "Dashboard Screen";
   static const String searchString = "Search";
   static const String noProductString = "No product found";
