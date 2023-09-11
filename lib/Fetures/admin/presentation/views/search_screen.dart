@@ -43,9 +43,10 @@ class _SearchScreenState extends State<SearchScreen> {
     final List<ProductModel> productList = passedCategory == null
         ? productProvider.getProducts
         : productProvider.findByCategory(ctgName: passedCategory);
+
     return GestureDetector(
       onTap: () {
-        FocusScope.of(context).unfocus();
+        //FocusScope.of(context).unfocus();
       },
       child: Scaffold(
           appBar: AppBar(
@@ -56,11 +57,27 @@ class _SearchScreenState extends State<SearchScreen> {
               child: Image.asset(AssetsImages.shoppingCart),
             ),
           ),
-          body: productList.isEmpty
-              ? const Center(
-                  child: TitlesTextWidget(label: AppStrings.noProductString),
-                )
-              : Padding(
+          body: StreamBuilder<List<ProductModel>>(
+              stream: productProvider.fetchProductsStream(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (snapshot.hasError) {
+                  return Center(
+                    child: TitlesTextWidget(
+                      label: snapshot.error.toString(),
+                    ),
+                  );
+                } else if (snapshot.data == null) {
+                  return const Center(
+                    child: TitlesTextWidget(
+                      label: "No product has been added",
+                    ),
+                  );
+                }
+                return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
@@ -128,7 +145,8 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                     ],
                   ),
-                )),
+                );
+              })),
     );
   }
 }

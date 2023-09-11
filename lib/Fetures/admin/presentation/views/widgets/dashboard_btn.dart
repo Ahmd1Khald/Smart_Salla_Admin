@@ -43,7 +43,12 @@ class DashboardButton extends StatelessWidget {
               const SizedBox(
                 height: 15,
               ),
-              SubtitleTextWidget(label: subTitle),
+              Center(
+                  child: SubtitleTextWidget(
+                label: subTitle,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              )),
             ],
           ),
         ),

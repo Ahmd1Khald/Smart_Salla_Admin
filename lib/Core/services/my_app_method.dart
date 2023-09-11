@@ -126,13 +126,18 @@ class MyAppMethods {
         });
   }
 
-  static void uploadedSuccess(BuildContext context) {
+  static void uploadedSuccess(
+      {required BuildContext context,
+      required bool isUpload,
+      required function}) {
     AwesomeDialog(
             context: context,
             dialogType: DialogType.success,
             animType: AnimType.bottomSlide,
-            desc: 'Product Added Successfully',
-            btnOkOnPress: () {},
+            desc: isUpload
+                ? 'Product Added Successfully'
+                : 'Product Edited Successfully',
+            btnOkOnPress: function,
             btnOkText: 'OK')
         .show();
   }
