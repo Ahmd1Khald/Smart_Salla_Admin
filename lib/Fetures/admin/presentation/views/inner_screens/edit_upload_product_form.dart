@@ -129,15 +129,17 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
           'productDescription': _descriptionController.text,
           'productQuantity': _quantityController.text,
           'createdAt': Timestamp.now(),
+        }).then((value) {
+          Navigator.pop(context);
+          MyAppMethods.uploadedSuccess(
+              context: context,
+              isUpload: true,
+              function: () {
+                clearForm();
+              });
         });
 
         if (!mounted) return;
-        MyAppMethods.uploadedSuccess(
-            context: context,
-            isUpload: true,
-            function: () {
-              clearForm();
-            });
       } on FirebaseException catch (error) {
         await MyAppMethods.showErrorORWarningDialog(
           context: context,
@@ -150,9 +152,7 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
           subtitle: "An error has been occured $error",
           fct: () {},
         );
-      } finally {
-        Navigator.pop(context);
-      }
+      } finally {}
     }
   }
 
@@ -201,14 +201,17 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
           'productDescription': _descriptionController.text,
           'productQuantity': _quantityController.text,
           'createdAt': widget.productModel!.createdAt,
+        }).then((value) {
+          Navigator.pop(context);
+          MyAppMethods.uploadedSuccess(
+              context: context,
+              isUpload: false,
+              function: () {
+                //clearForm();
+              });
         });
+
         if (!mounted) return;
-        MyAppMethods.uploadedSuccess(
-            context: context,
-            isUpload: true,
-            function: () {
-              clearForm();
-            });
       } on FirebaseException catch (error) {
         await MyAppMethods.showErrorORWarningDialog(
           context: context,
@@ -221,9 +224,7 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
           subtitle: "An error has been occured $error",
           fct: () {},
         );
-      } finally {
-        Navigator.pop(context);
-      }
+      } finally {}
     }
   }
 
