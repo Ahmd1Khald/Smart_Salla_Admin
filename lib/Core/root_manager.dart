@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:salla_admin/Fetures/admin/presentation/views/dashboard_screen.dart';
 import 'package:salla_admin/Fetures/admin/presentation/views/inner_screens/orders/orders_screen.dart';
 import 'package:salla_admin/Fetures/admin/presentation/views/search_screen.dart';
+import 'package:salla_admin/splash/splash_screen.dart';
 
 import '../Fetures/admin/presentation/views/inner_screens/edit_upload_product_form.dart';
 import 'consts/app_strings.dart';
@@ -18,6 +19,8 @@ class Routes {
 
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
+      case Routes.splashRoute:
+        return MaterialPageRoute(builder: (_) => const SplashScreen());
       case Routes.dashboardRoute:
         return MaterialPageRoute(builder: (_) => const DashboardScreen());
       case Routes.allProductRoute:
