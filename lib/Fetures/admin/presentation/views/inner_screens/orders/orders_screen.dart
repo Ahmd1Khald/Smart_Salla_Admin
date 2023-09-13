@@ -32,11 +32,13 @@ class _OrdersScreenState extends State<OrdersScreen> {
                 child: CircularProgressIndicator(),
               );
             } else if (snapshot.hasError) {
+              print(snapshot.error);
               return Center(
                 child: SelectableText(
                     "An error has been occured ${snapshot.error}"),
               );
-            } else if (!snapshot.hasData || ordersProvider.getOrders.isEmpty) {
+            } else if (snapshot.data == null ||
+                ordersProvider.getOrders.isEmpty) {
               return const Center(
                   child: TitlesTextWidget(
                 label: "No Orders found",

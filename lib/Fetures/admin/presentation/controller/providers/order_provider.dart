@@ -12,7 +12,6 @@ class OrdersProvider with ChangeNotifier {
   Future<List<OrdersModel>> fetchOrder() async {
     final auth = FirebaseAuth.instance;
     User? user = auth.currentUser;
-    var uid = user!.uid;
     try {
       await FirebaseFirestore.instance
           .collection(AppStrings.ordersCollection)
@@ -44,6 +43,8 @@ class OrdersProvider with ChangeNotifier {
 
   Future<void> clearOrderFromFirebase({required String orderId}) async {
     try {
+      print(orderId);
+      print("orderId ++++++");
       await FirebaseFirestore.instance
           .collection(AppStrings.ordersCollection)
           .doc(orderId)

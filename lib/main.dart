@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:salla_admin/Fetures/admin/presentation/controller/providers/order_provider.dart';
 
 import 'Core/consts/app_strings.dart';
 import 'Core/consts/theme_data.dart';
@@ -58,6 +59,9 @@ class MyApp extends StatelessWidget {
             ),
             ChangeNotifierProvider(
               create: (_) => ProductProvider(),
+            ),
+            ChangeNotifierProvider(
+              create: (_) => OrdersProvider(),
             ),
           ],
           child: Consumer<ThemeProvider>(builder: (
