@@ -9,7 +9,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
       splash: 'assets/images/bag/shopping_cart.png',
-      splashIconSize: 84,
+      splashIconSize: 90,
       nextScreen: const DashboardScreen(),
       backgroundColor: Colors.deepPurpleAccent,
       curve: Curves.bounceInOut,
