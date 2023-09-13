@@ -55,7 +55,7 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
     _descriptionController =
         TextEditingController(text: widget.productModel?.productDescription);
     _quantityController = TextEditingController(
-        text: widget.productModel!.productQuantity.toString());
+        text: widget.productModel?.productQuantity.toString());
 
     super.initState();
   }
