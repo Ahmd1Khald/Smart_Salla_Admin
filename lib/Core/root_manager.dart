@@ -26,7 +26,7 @@ class Routes {
       case Routes.allProductRoute:
         return MaterialPageRoute(builder: (_) => const SearchScreen());
       case Routes.viewOrdersRoute:
-        return MaterialPageRoute(builder: (_) => const OrdersScreenFree());
+        return MaterialPageRoute(builder: (_) => const OrdersScreen());
       case Routes.editOrUploadProductRoute:
         return MaterialPageRoute(
             builder: (_) => const EditOrUploadProductScreen());

@@ -35,7 +35,6 @@ class AppVariables {
   static List<String> categoriesList = [
     'Phones',
     'Clothes',
-    'Beauty',
     'Shoes',
     'Laptops',
     'Books',

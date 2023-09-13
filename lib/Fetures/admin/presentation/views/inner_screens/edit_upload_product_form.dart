@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:salla_admin/Core/consts/app_variables.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../../../Core/consts/app_strings.dart';
 import '../../../../../Core/consts/my_validators.dart';
 import '../../../../../Core/services/my_app_method.dart';
 import '../../../../../Core/widgets/subtitle_text.dart';
@@ -84,6 +85,8 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
   }
 
   Future<void> _uploadProduct() async {
+    print(int.parse(_quantityController.text));
+    print("+++++++++++++");
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
     if (_pickedImage == null) {
@@ -118,7 +121,7 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
 
         final productID = const Uuid().v4();
         await FirebaseFirestore.instance
-            .collection("products")
+            .collection(AppStrings.productsCollection)
             .doc(productID)
             .set({
           'productId': productID,
@@ -127,7 +130,7 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
           'productImage': productImageUrl,
           'productCategory': _categoryValue,
           'productDescription': _descriptionController.text,
-          'productQuantity': _quantityController.text,
+          'productQuantity': int.parse(_quantityController.text),
           'createdAt': Timestamp.now(),
         }).then((value) {
           Navigator.pop(context);
@@ -190,7 +193,7 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
         }
 
         await FirebaseFirestore.instance
-            .collection("products")
+            .collection(AppStrings.productsCollection)
             .doc(widget.productModel!.productId)
             .update({
           'productId': widget.productModel!.productId,
@@ -199,7 +202,7 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
           'productImage': productImageUrl ?? productNetworkImage,
           'productCategory': _categoryValue,
           'productDescription': _descriptionController.text,
-          'productQuantity': _quantityController.text,
+          'productQuantity': int.parse(_quantityController.text),
           'createdAt': widget.productModel!.createdAt,
         }).then((value) {
           Navigator.pop(context);
