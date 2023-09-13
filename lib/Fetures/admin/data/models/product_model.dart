@@ -7,8 +7,8 @@ class ProductModel with ChangeNotifier {
       productPrice,
       productCategory,
       productDescription,
-      productImage,
-      productQuantity;
+      productImage;
+  final int productQuantity;
   Timestamp? createdAt;
   ProductModel({
     required this.productId,

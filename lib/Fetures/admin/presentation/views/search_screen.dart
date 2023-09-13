@@ -1,9 +1,9 @@
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:salla_admin/Core/widgets/subtitle_text.dart';
 
 import '../../../../Core/consts/app_strings.dart';
-import '../../../../Core/services/assets_manager.dart';
 import '../../../../Core/widgets/product_widget.dart';
 import '../../../../Core/widgets/title_text.dart';
 import '../../data/models/product_model.dart';
@@ -50,12 +50,7 @@ class _SearchScreenState extends State<SearchScreen> {
       },
       child: Scaffold(
           appBar: AppBar(
-            title: TitlesTextWidget(
-                label: passedCategory ?? AppStrings.searchString),
-            leading: Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Image.asset(AssetsImages.shoppingCart),
-            ),
+            title: TitlesTextWidget(label: passedCategory ?? "Products"),
           ),
           body: StreamBuilder<List<ProductModel>>(
               stream: productProvider.fetchProductsStream(),
@@ -66,7 +61,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   );
                 } else if (snapshot.hasError) {
                   return Center(
-                    child: TitlesTextWidget(
+                    child: SubtitleTextWidget(
                       label: snapshot.error.toString(),
                     ),
                   );
