@@ -6,6 +6,8 @@ A new Flutter project.
 
 ![splash](https://github.com/Ahmd1Khald/Smart_Salla_Admin/assets/102539416/9a0681f9-094f-4729-8b7d-ae759a274d96)
 
+![home](https://github.com/Ahmd1Khald/Smart_Salla_Admin/assets/102539416/2ce9f828-991e-420d-be42-4f31e2d188c7)
+
 
 A few resources to get you started if this is your first Flutter project:
 
