@@ -11,6 +11,12 @@ import 'Fetures/admin/presentation/controller/providers/product_provider.dart';
 import 'firebase_options.dart';
 
 void main() {
+  //runApp(
+  //   DevicePreview(
+  //     enabled: !kReleaseMode,
+  //     builder: (context) => const MyApp(), // Wrap your app
+  //   ),
+  // );
   runApp(const MyApp());
 }
 
